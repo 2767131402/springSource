@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.automannn.spring</groupId>
+    <artifactId>springSource</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>springAop</module>
+        <module>springAspects</module>
+        <module>springBeans</module>
+        <module>springContext</module>
+        <module>springContextIndexer</module>
+        <module>springContextSupport</module>
+        <module>springCore</module>
+        <module>springExpression</module>
+        <module>springInstrument</module>
+        <module>springJcl</module>
+        <module>springJdbc</module>
+        <module>springJms</module>
+        <module>springMessaging</module>
+        <module>springOrm</module>
+        <module>springOxm</module>
+        <module>springR2dbc</module>
+        <module>springTest</module>
+        <module>springTx</module>
+        <module>springWeb</module>
+        <module>springWebflux</module>
+        <module>springWebmvc</module>
+        <module>springWebsocket</module>
+    </modules>
+
+
+</project>
