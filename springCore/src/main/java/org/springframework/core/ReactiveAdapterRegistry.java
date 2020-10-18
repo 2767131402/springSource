@@ -24,8 +24,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-import kotlinx.coroutines.CompletableDeferredKt;
-import kotlinx.coroutines.Deferred;
+//import kotlinx.coroutines.CompletableDeferredKt;
+//import kotlinx.coroutines.Deferred;
 import org.reactivestreams.Publisher;
 import reactor.blockhound.BlockHound;
 import reactor.blockhound.integration.BlockHoundIntegration;
@@ -105,7 +105,8 @@ public class ReactiveAdapterRegistry {
 
 		// Coroutines
 		if (this.reactorPresent && ClassUtils.isPresent("kotlinx.coroutines.reactor.MonoKt", classLoader)) {
-			new CoroutinesRegistrar().registerAdapters(this);
+			//todo: 有 kotlin的东西，干掉
+//			new CoroutinesRegistrar().registerAdapters(this);
 		}
 	}
 
@@ -394,20 +395,21 @@ public class ReactiveAdapterRegistry {
 
 	private static class CoroutinesRegistrar {
 
-		@SuppressWarnings("KotlinInternalInJava")
-		void registerAdapters(ReactiveAdapterRegistry registry) {
-			registry.registerReactiveType(
-					ReactiveTypeDescriptor.singleOptionalValue(Deferred.class,
-							() -> CompletableDeferredKt.CompletableDeferred(null)),
-					source -> CoroutinesUtils.deferredToMono((Deferred<?>) source),
-					source -> CoroutinesUtils.monoToDeferred(Mono.from(source)));
-
-			registry.registerReactiveType(
-					ReactiveTypeDescriptor.multiValue(kotlinx.coroutines.flow.Flow.class, kotlinx.coroutines.flow.FlowKt::emptyFlow),
-					source -> kotlinx.coroutines.reactor.ReactorFlowKt.asFlux((kotlinx.coroutines.flow.Flow<?>) source),
-					kotlinx.coroutines.reactive.ReactiveFlowKt::asFlow
-			);
-		}
+		//todo:  这里有kotlind的东西，不想了解  干掉
+//		@SuppressWarnings("KotlinInternalInJava")
+//		void registerAdapters(ReactiveAdapterRegistry registry) {
+//			registry.registerReactiveType(
+//					ReactiveTypeDescriptor.singleOptionalValue(Deferred.class,
+//							() -> CompletableDeferredKt.CompletableDeferred(null)),
+//					source -> CoroutinesUtils.deferredToMono((Deferred<?>) source),
+//					source -> CoroutinesUtils.monoToDeferred(Mono.from(source)));
+//
+//			registry.registerReactiveType(
+//					ReactiveTypeDescriptor.multiValue(kotlinx.coroutines.flow.Flow.class, kotlinx.coroutines.flow.FlowKt::emptyFlow),
+//					source -> kotlinx.coroutines.reactor.ReactorFlowKt.asFlux((kotlinx.coroutines.flow.Flow<?>) source),
+//					kotlinx.coroutines.reactive.ReactiveFlowKt::asFlow
+//			);
+//		}
 	}
 
 

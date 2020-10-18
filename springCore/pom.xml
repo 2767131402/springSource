@@ -60,7 +60,7 @@
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
-            <version>3.3.10.RELEASE</version>
+            <version>${springSource.reactor-core}</version>
         </dependency>
 
         <dependency>
@@ -98,6 +98,12 @@
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs</artifactId>
+            <version>${springSource.google-code-findbugs}</version>
         </dependency>
 
         <!--  jcl      -->
