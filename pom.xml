@@ -17,13 +17,15 @@
         <springSource.javax.annotation-api>1.3.1</springSource.javax.annotation-api>
         <springSource.google-code-findbugs>3.0.1</springSource.google-code-findbugs>
         <springSource.snake-yaml>1.27</springSource.snake-yaml>
+        <springSource.jamon>2.82</springSource.jamon>
+        <springSource.objenesis>3.1</springSource.objenesis>
     </properties>
 
     <modules>
         <module>springAop</module>
         <module>springAspects</module>
         <module>springBeans</module>
-        <module>springContext</module>
+<!--        <module>springContext</module>-->
         <module>springContextIndexer</module>
         <module>springContextSupport</module>
         <module>springCore</module>

@@ -29,6 +29,14 @@
             <artifactId>cglib</artifactId>
             <version>${springSource.cglib}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>${springSource.objenesis}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>io.projectreactor.tools</groupId>
             <artifactId>blockhound</artifactId>
