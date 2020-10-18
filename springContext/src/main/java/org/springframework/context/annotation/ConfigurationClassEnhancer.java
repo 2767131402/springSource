@@ -25,8 +25,8 @@ import java.util.Arrays;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.objectweb.asm.Type;
 import org.springframework.aop.scope.ScopedProxyFactoryBean;
-import org.springframework.asm.Type;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -34,26 +34,27 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.SimpleInstantiationStrategy;
-import org.springframework.cglib.core.ClassGenerator;
+
 import org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy;
-import org.springframework.cglib.core.Constants;
 import org.springframework.cglib.core.SpringNamingPolicy;
-import org.springframework.cglib.proxy.Callback;
-import org.springframework.cglib.proxy.CallbackFilter;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.Factory;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
-import org.springframework.cglib.proxy.NoOp;
-import org.springframework.cglib.transform.ClassEmitterTransformer;
-import org.springframework.cglib.transform.TransformingClassGenerator;
 import org.springframework.lang.Nullable;
-import org.springframework.objenesis.ObjenesisException;
 import org.springframework.objenesis.SpringObjenesis;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
+import org.objenesis.ObjenesisException;
+import net.sf.cglib.proxy.NoOp;
+import net.sf.cglib.transform.ClassEmitterTransformer;
+import net.sf.cglib.transform.TransformingClassGenerator;
+import net.sf.cglib.proxy.Factory;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.CallbackFilter;
+import net.sf.cglib.core.Constants;
+import net.sf.cglib.core.ClassGenerator;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodProxy;
 
 /**
  * Enhances {@link Configuration} classes by generating a CGLIB subclass which

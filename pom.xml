@@ -19,13 +19,18 @@
         <springSource.snake-yaml>1.27</springSource.snake-yaml>
         <springSource.jamon>2.82</springSource.jamon>
         <springSource.objenesis>3.1</springSource.objenesis>
+        <springSource.money-api>1.1</springSource.money-api>
+        <springSource.bsh>2.0b4</springSource.bsh>
+        <springSource.groovy>3.0.1</springSource.groovy>
+        <springSource.kotlin-reflect>1.4.10</springSource.kotlin-reflect>
+        <springSource.kotlin-stdlib>1.4.10</springSource.kotlin-stdlib>
     </properties>
 
     <modules>
         <module>springAop</module>
         <module>springAspects</module>
         <module>springBeans</module>
-<!--        <module>springContext</module>-->
+        <module>springContext</module>
         <module>springContextIndexer</module>
         <module>springContextSupport</module>
         <module>springCore</module>

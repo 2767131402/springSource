@@ -130,7 +130,6 @@ import org.springframework.util.StringUtils;
  * @see org.springframework.context.support.GenericGroovyApplicationContext
  */
 
-//todo: 暂且把groovy工厂干掉
 public class GroovyBeanDefinitionReader {
 //public class GroovyBeanDefinitionReader extends AbstractBeanDefinitionReader implements GroovyObject {
 

@@ -54,11 +54,11 @@
             <version>1.2.2</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>javax.money</groupId>-->
-<!--            <artifactId>javax.money-api</artifactId>-->
-<!--            <version>1.1</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>javax.money</groupId>
+            <artifactId>money-api</artifactId>
+            <version>${springSource.money-api}</version>
+        </dependency>
 
         <dependency>
             <groupId>javax.validation</groupId>
@@ -81,13 +81,14 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>1.8.3</version>
+            <version>${springSource.groovy}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.apache-extras.beanshell</groupId>-->
-<!--            <artifactId>bsh</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.beanshell</groupId>
+            <artifactId>bsh</artifactId>
+            <version>${springSource.bsh}</version>
+        </dependency>
 
         <dependency>
             <groupId>joda-time</groupId>
@@ -101,15 +102,17 @@
             <version>5.4.3.Final</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--            <artifactId>kotlin-reflect</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${springSource.kotlin-reflect}</version>
+        </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--            <artifactId>kotlin-stdlib</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${springSource.kotlin-stdlib}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.reactivestreams</groupId>
@@ -131,6 +134,18 @@
         <dependency>
             <groupId>com.automannn.spring</groupId>
             <artifactId>springAop</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springExpression</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springInstrument</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -356,7 +356,9 @@ class ConfigurationClassBeanDefinitionReader {
 			if (BeanDefinitionReader.class == readerClass) {
 				if (StringUtils.endsWithIgnoreCase(resource, ".groovy")) {
 					// When clearly asking for Groovy, that's what they'll get...
-					readerClass = GroovyBeanDefinitionReader.class;
+					//todo: 暂时把groovy给干掉，编译不通过
+//					readerClass = GroovyBeanDefinitionReader.class;
+					readerClass = null;
 				}
 				else if (shouldIgnoreXml) {
 					throw new UnsupportedOperationException("XML support disabled");
