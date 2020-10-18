@@ -10,6 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>springBeans</artifactId>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -21,7 +33,7 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.25</version>
+            <version>${springSource.snake-yaml}</version>
         </dependency>
 
         <dependency>
@@ -29,8 +41,14 @@
             <artifactId>groovy-xml</artifactId>
             <version>2.4.15</version>
         </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springCore</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
-<!--        <dependency>-->
+        <!--        <dependency>-->
 <!--            <groupId>org.jetbrains.kotlin</groupId>-->
 <!--            <artifactId>kotlin-reflect</artifactId>-->
 <!--        </dependency>-->
@@ -41,6 +59,4 @@
 <!--        </dependency>-->
         <!-- 1.依赖springCore       -->
     </dependencies>
-
-
 </project>

@@ -16,6 +16,7 @@
         <springSource.reactor-core>3.4.0-RC1</springSource.reactor-core>
         <springSource.javax.annotation-api>1.3.1</springSource.javax.annotation-api>
         <springSource.google-code-findbugs>3.0.1</springSource.google-code-findbugs>
+        <springSource.snake-yaml>1.27</springSource.snake-yaml>
     </properties>
 
     <modules>
