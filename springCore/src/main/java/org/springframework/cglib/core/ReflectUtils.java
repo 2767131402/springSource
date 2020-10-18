@@ -38,8 +38,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.asm.Attribute;
-import org.springframework.asm.Type;
+import net.sf.cglib.core.*;
+import org.objectweb.asm.Attribute;
+import org.objectweb.asm.Type;
 
 /**
  * @version $Id: ReflectUtils.java,v 1.30 2009/01/11 19:47:49 herbyderby Exp $

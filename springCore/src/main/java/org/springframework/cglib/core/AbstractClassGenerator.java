@@ -23,9 +23,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import org.springframework.asm.ClassReader;
-import org.springframework.cglib.core.internal.Function;
-import org.springframework.cglib.core.internal.LoadingCache;
+import net.sf.cglib.core.*;
+import net.sf.cglib.core.internal.Function;
+import net.sf.cglib.core.internal.LoadingCache;
+import org.objectweb.asm.ClassReader;
 
 /**
  * Abstract class for all code-generating CGLIB utilities.

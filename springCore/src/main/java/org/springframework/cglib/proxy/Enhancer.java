@@ -31,31 +31,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.asm.ClassVisitor;
-import org.springframework.asm.Label;
-import org.springframework.asm.Type;
+import net.sf.cglib.core.*;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.CallbackFilter;
+import net.sf.cglib.proxy.Factory;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.Type;
 import org.springframework.cglib.core.AbstractClassGenerator;
-import org.springframework.cglib.core.ClassEmitter;
-import org.springframework.cglib.core.CodeEmitter;
-import org.springframework.cglib.core.CodeGenerationException;
-import org.springframework.cglib.core.CollectionUtils;
-import org.springframework.cglib.core.Constants;
-import org.springframework.cglib.core.DuplicatesPredicate;
-import org.springframework.cglib.core.EmitUtils;
 import org.springframework.cglib.core.KeyFactory;
-import org.springframework.cglib.core.Local;
-import org.springframework.cglib.core.MethodInfo;
-import org.springframework.cglib.core.MethodInfoTransformer;
-import org.springframework.cglib.core.MethodWrapper;
-import org.springframework.cglib.core.ObjectSwitchCallback;
-import org.springframework.cglib.core.ProcessSwitchCallback;
 import org.springframework.cglib.core.ReflectUtils;
-import org.springframework.cglib.core.RejectModifierPredicate;
-import org.springframework.cglib.core.Signature;
-import org.springframework.cglib.core.Transformer;
-import org.springframework.cglib.core.TypeUtils;
-import org.springframework.cglib.core.VisibilityPredicate;
-import org.springframework.cglib.core.WeakCacheKey;
 
 /**
  * Generates dynamic subclasses to enable method interception. This

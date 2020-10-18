@@ -12,6 +12,7 @@
     <properties>
         <springSource.cglib>3.3.0</springSource.cglib>
         <springSource.blockhound>1.0.4.RELEASE</springSource.blockhound>
+        <springSource.jopt-simple>5.0.4</springSource.jopt-simple>
     </properties>
 
     <modules>

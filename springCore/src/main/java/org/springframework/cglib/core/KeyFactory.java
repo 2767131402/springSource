@@ -21,10 +21,11 @@ import java.security.ProtectionDomain;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.asm.ClassVisitor;
-import org.springframework.asm.Label;
-import org.springframework.asm.Type;
-import org.springframework.cglib.core.internal.CustomizerRegistry;
+import net.sf.cglib.core.*;
+import net.sf.cglib.core.internal.CustomizerRegistry;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.Type;
 
 /**
  * Generates classes to handle multi-valued keys, for use in things such as Maps and Sets.
