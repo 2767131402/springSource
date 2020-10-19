@@ -25,6 +25,8 @@
         <springSource.kotlin-reflect>1.4.10</springSource.kotlin-reflect>
         <springSource.kotlin-stdlib>1.4.10</springSource.kotlin-stdlib>
         <springSource.uow>6.0.2.17</springSource.uow>
+        <springSource.derby>10.9.1.0</springSource.derby>
+        <springSource.derby-client>10.9.1.0</springSource.derby-client>
     </properties>
 
     <modules>
