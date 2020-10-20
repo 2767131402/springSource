@@ -56,7 +56,7 @@
         <module>springTx</module>
         <module>springWeb</module>
         <module>springWebflux</module>
-        <module>springWebmvc</module>
+<!--        <module>springWebmvc</module>-->
         <module>springWebsocket</module>
     </modules>
 
