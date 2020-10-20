@@ -33,6 +33,7 @@
         <springSource.jetty-servlet>9.4.12.RC2</springSource.jetty-servlet>
         <springSource.websocket-client>9.4.12.RC2</springSource.websocket-client>
         <springSource.websocket-server>9.4.12.RC2</springSource.websocket-server>
+        <springSource.jackson-base>2.9.8</springSource.jackson-base>
     </properties>
 
     <modules>
@@ -56,7 +57,7 @@
         <module>springTx</module>
         <module>springWeb</module>
         <module>springWebflux</module>
-<!--        <module>springWebmvc</module>-->
+        <module>springWebmvc</module>
         <module>springWebsocket</module>
     </modules>
 
