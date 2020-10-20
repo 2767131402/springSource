@@ -27,6 +27,12 @@
         <springSource.uow>6.0.2.17</springSource.uow>
         <springSource.derby>10.9.1.0</springSource.derby>
         <springSource.derby-client>10.9.1.0</springSource.derby-client>
+        <springSource.servlet-api>4.0.1</springSource.servlet-api>
+        <springSource.reactor-netty-http>1.0.0-RC1</springSource.reactor-netty-http>
+        <springSource.jetty-server>9.4.12.RC2</springSource.jetty-server>
+        <springSource.jetty-servlet>9.4.12.RC2</springSource.jetty-servlet>
+        <springSource.websocket-client>9.4.12.RC2</springSource.websocket-client>
+        <springSource.websocket-server>9.4.12.RC2</springSource.websocket-server>
     </properties>
 
     <modules>

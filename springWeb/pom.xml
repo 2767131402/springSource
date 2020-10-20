@@ -10,12 +10,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>springWeb</artifactId>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${springSource.servlet-api}</version>
         </dependency>
 
         <dependency>
@@ -102,11 +114,11 @@
             <version>4.1.52.Final</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.projectreactor.netty</groupId>-->
-<!--            <artifactId>reactor-netty-http</artifactId>-->
-<!--            <version>1</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.projectreactor.netty</groupId>
+            <artifactId>reactor-netty-http</artifactId>
+            <version>${springSource.reactor-netty-http}</version>
+        </dependency>
 
         <dependency>
             <groupId>io.undertow</groupId>
@@ -129,7 +141,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>11.0.0.beta2</version>
+            <version>${springSource.jetty-server}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -141,13 +153,13 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>11.0.0.beta2</version>
+            <version>${springSource.jetty-servlet}</version>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-reactive-httpclient</artifactId>
-            <version>1.1.4</version>
+            <version>1.1.3</version>
         </dependency>
 
         <dependency>
@@ -273,12 +285,36 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>1.4.10</version>
         </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springCore</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springBeans</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains.kotlinx</groupId>-->
-<!--            <artifactId>kotlinx-serialization-core</artifactId>-->
-<!--            <version>1.0.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-serialization-core</artifactId>
+            <version>1.0.0-RC</version>
+        </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springContext</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.automannn.spring</groupId>
+            <artifactId>springOxm</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

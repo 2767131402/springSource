@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-server</artifactId>
-            <version>9.4.31.v20200723</version>
+            <version>${springSource.websocket-server}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-client</artifactId>
-            <version>9.4.31.v20200723</version>
+            <version>${springSource.websocket-client}</version>
         </dependency>
 
         <dependency>
