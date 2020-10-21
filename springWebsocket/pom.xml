@@ -107,12 +107,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>${springSource.jackson-base}</version>
         </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.automannn.spring</groupId>
             <artifactId>springCore</artifactId>
