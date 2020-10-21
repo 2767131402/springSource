@@ -41,7 +41,7 @@
 
     <modules>
         <module>springAop</module>
-        <module>springAspects</module>
+<!--        <module>springAspects</module>-->
         <module>springBeans</module>
         <module>springContext</module>
         <module>springContextIndexer</module>
