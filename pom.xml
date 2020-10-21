@@ -44,7 +44,7 @@
 <!--        <module>springAspects</module>-->
         <module>springBeans</module>
         <module>springContext</module>
-        <module>springContextIndexer</module>
+<!--        <module>springContextIndexer</module>-->
         <module>springContextSupport</module>
         <module>springCore</module>
         <module>springExpression</module>
@@ -55,8 +55,8 @@
         <module>springMessaging</module>
         <module>springOrm</module>
         <module>springOxm</module>
-        <module>springR2dbc</module>
-        <module>springTest</module>
+<!--        <module>springR2dbc</module>-->
+<!--        <module>springTest</module>-->
         <module>springTx</module>
         <module>springWeb</module>
         <module>springWebflux</module>
