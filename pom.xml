@@ -34,6 +34,8 @@
         <springSource.websocket-client>9.4.12.RC2</springSource.websocket-client>
         <springSource.websocket-server>9.4.12.RC2</springSource.websocket-server>
         <springSource.jackson-base>2.9.8</springSource.jackson-base>
+        <springSource.rsocket-core>1.1.0-M2</springSource.rsocket-core>
+        <springSource.rsocket-transport-netty>1.1.0-M2</springSource.rsocket-transport-netty>
     </properties>
 
     <modules>
