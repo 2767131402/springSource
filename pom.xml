@@ -31,6 +31,7 @@
         <springSource.reactor-netty-http>1.0.0-RC1</springSource.reactor-netty-http>
         <springSource.jetty-server>9.4.12.RC2</springSource.jetty-server>
         <springSource.jetty-servlet>9.4.12.RC2</springSource.jetty-servlet>
+        <springSource.jetty-client>9.4.12.RC2</springSource.jetty-client>
         <springSource.websocket-client>9.4.12.RC2</springSource.websocket-client>
         <springSource.websocket-server>9.4.12.RC2</springSource.websocket-server>
         <springSource.jackson-base>2.9.8</springSource.jackson-base>
