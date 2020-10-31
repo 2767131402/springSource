@@ -63,7 +63,7 @@ import org.springframework.core.Ordered;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Documented
-public @interface Order {
+public @interface Order{
 
 	/**
 	 * The order value.
