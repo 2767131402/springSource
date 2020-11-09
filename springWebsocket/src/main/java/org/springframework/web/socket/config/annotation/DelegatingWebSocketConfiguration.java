@@ -37,6 +37,7 @@ public class DelegatingWebSocketConfiguration extends WebSocketConfigurationSupp
 	private final List<WebSocketConfigurer> configurers = new ArrayList<>();
 
 
+
 	@Autowired(required = false)
 	public void setConfigurers(List<WebSocketConfigurer> configurers) {
 		if (!CollectionUtils.isEmpty(configurers)) {

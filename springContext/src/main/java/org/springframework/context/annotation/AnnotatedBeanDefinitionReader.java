@@ -68,6 +68,8 @@ public class AnnotatedBeanDefinitionReader {
 	 * @see #setEnvironment(Environment)
 	 */
 	public AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry) {
+		/*xxx:  在初始化该类时，默认会将 ConfigurationClassBeanFactoryPostProcessor放入工厂中，
+		   以 internalConfigurationAnnotationProcessors为名称*/
 		this(registry, getOrCreateEnvironment(registry));
 	}
 

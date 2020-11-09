@@ -17,11 +17,12 @@
 package org.springframework.aop.testfixture.interceptor;
 
 import org.springframework.aop.support.DelegatingIntroductionInterceptor;
-import org.springframework.core.testfixture.TimeStamped;
+//import org.springframework.core.testfixture.TimeStamped;
 
 @SuppressWarnings("serial")
 public class TimestampIntroductionInterceptor extends DelegatingIntroductionInterceptor
-		implements TimeStamped {
+		{
+//		implements TimeStamped {
 
 	private long ts;
 
@@ -36,7 +37,7 @@ public class TimestampIntroductionInterceptor extends DelegatingIntroductionInte
 		this.ts = ts;
 	}
 
-	@Override
+//	@Override
 	public long getTimeStamp() {
 		return ts;
 	}

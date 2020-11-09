@@ -29,7 +29,7 @@ import org.w3c.dom.Element
  * @author Juergen Hoeller
  * @since 4.0
  */
-@groovy.transform.PackageScope
+//@groovy.transform.PackageScope
 public class GroovyDynamicElementReader extends GroovyObjectSupport {
 
 	private final String rootNamespace
