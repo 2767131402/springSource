@@ -170,6 +170,7 @@ public abstract class AbstractApplicationEventMulticaster
 	protected Collection<ApplicationListener<?>> getApplicationListeners(
 			ApplicationEvent event, ResolvableType eventType) {
 
+		/*xxx:通过事件源，以及事件类型，对监听器进行筛选，并将之缓存*/
 		Object source = event.getSource();
 		Class<?> sourceType = (source != null ? source.getClass() : null);
 		ListenerCacheKey cacheKey = new ListenerCacheKey(eventType, sourceType);
@@ -185,6 +186,7 @@ public abstract class AbstractApplicationEventMulticaster
 					(ClassUtils.isCacheSafe(event.getClass(), this.beanClassLoader) &&
 							(sourceType == null || ClassUtils.isCacheSafe(sourceType, this.beanClassLoader)))) {
 				newRetriever = new CachedListenerRetriever();
+				/*xxx: 缓存应用监听器群组*/
 				existingRetriever = this.retrieverCache.putIfAbsent(cacheKey, newRetriever);
 				if (existingRetriever != null) {
 					newRetriever = null;  // no need to populate it in retrieveApplicationListeners
@@ -201,6 +203,7 @@ public abstract class AbstractApplicationEventMulticaster
 			// Proceed like caching wasn't possible for this current local attempt.
 		}
 
+		/*xxx: 从所有的监听器中，遴选出 符合条件的 监听器群组*/
 		return retrieveApplicationListeners(eventType, sourceType, newRetriever);
 	}
 
@@ -356,6 +359,7 @@ public abstract class AbstractApplicationEventMulticaster
 	protected boolean supportsEvent(
 			ApplicationListener<?> listener, ResolvableType eventType, @Nullable Class<?> sourceType) {
 
+		/*xxx: 监听器是否支持某一个事件，通过监听器本身的配置情况来进行判断*/
 		GenericApplicationListener smartListener = (listener instanceof GenericApplicationListener ?
 				(GenericApplicationListener) listener : new GenericApplicationListenerAdapter(listener));
 		return (smartListener.supportsEventType(eventType) && smartListener.supportsSourceType(sourceType));

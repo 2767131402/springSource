@@ -40,24 +40,28 @@ public interface ApplicationEventMulticaster {
 	 * Add a listener to be notified of all events.
 	 * @param listener the listener to add
 	 */
+	/*xxx: 新增应用监听器，交由抽象实现*/
 	void addApplicationListener(ApplicationListener<?> listener);
 
 	/**
 	 * Add a listener bean to be notified of all events.
 	 * @param listenerBeanName the name of the listener bean to add
 	 */
+	/*xxx: 新增应用监听bean，交由抽象实现*/
 	void addApplicationListenerBean(String listenerBeanName);
 
 	/**
 	 * Remove a listener from the notification list.
 	 * @param listener the listener to remove
 	 */
+	/*xxx: 移除应用监听器 ，交由抽象实现*/
 	void removeApplicationListener(ApplicationListener<?> listener);
 
 	/**
 	 * Remove a listener bean from the notification list.
 	 * @param listenerBeanName the name of the listener bean to remove
 	 */
+	/*xxx: 移除应用监听器bean，交由抽象实现*/
 	void removeApplicationListenerBean(String listenerBeanName);
 
 	/**
@@ -73,6 +77,7 @@ public interface ApplicationEventMulticaster {
 	 * if possible as it provides better support for generics-based events.
 	 * @param event the event to multicast
 	 */
+	/*xxx: 上下文发布事件，实际调用的是该方法，交由具体类实现*/
 	void multicastEvent(ApplicationEvent event);
 
 	/**
@@ -83,6 +88,7 @@ public interface ApplicationEventMulticaster {
 	 * @param eventType the type of event (can be {@code null})
 	 * @since 4.2
 	 */
+	/*xxx: 实际调用的广播事件的方法，交由具体实现*/
 	void multicastEvent(ApplicationEvent event, @Nullable ResolvableType eventType);
 
 }
