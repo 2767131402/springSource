@@ -90,6 +90,7 @@ public abstract class AopConfigUtils {
 
 	@Nullable
 	public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(BeanDefinitionRegistry registry) {
+		/*xxx： 在当前上下文中注入 AspectJAnnotation自动代理生成器*/
 		return registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry, null);
 	}
 
@@ -120,6 +121,7 @@ public abstract class AopConfigUtils {
 
 		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
 
+		/*xxx: 如果存在当前类型的 自动代理生成器，则根据情况替换已经注册的自动生成器*/
 		if (registry.containsBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME)) {
 			BeanDefinition apcDefinition = registry.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
 			if (!cls.getName().equals(apcDefinition.getBeanClassName())) {
@@ -132,6 +134,7 @@ public abstract class AopConfigUtils {
 			return null;
 		}
 
+		/*xxx: 如果不存在，则进行注册*/
 		RootBeanDefinition beanDefinition = new RootBeanDefinition(cls);
 		beanDefinition.setSource(source);
 		beanDefinition.getPropertyValues().add("order", Ordered.HIGHEST_PRECEDENCE);

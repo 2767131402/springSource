@@ -48,6 +48,8 @@ import org.springframework.lang.Nullable;
 public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializable {
 
 	@Override
+	/*xxx: 获取拦截器和动态拦截切面，这个返回值作为拦截器链*/
+	/*xxx: 这里通过所有的通知器，对传入的方法进行判断，传入的方法为这个流程的关键*/
 	public List<Object> getInterceptorsAndDynamicInterceptionAdvice(
 			Advised config, Method method, @Nullable Class<?> targetClass) {
 
@@ -60,6 +62,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 		Boolean hasIntroductions = null;
 
 		for (Advisor advisor : advisors) {
+			/*xxx:切点通知器*/
 			if (advisor instanceof PointcutAdvisor) {
 				// Add it conditionally.
 				PointcutAdvisor pointcutAdvisor = (PointcutAdvisor) advisor;
@@ -75,6 +78,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 					else {
 						match = mm.matches(method, actualClass);
 					}
+					/*xxx:当切点匹配时，再根据切点的配置情况，加入拦截器列表*/
 					if (match) {
 						MethodInterceptor[] interceptors = registry.getInterceptors(advisor);
 						if (mm.isRuntime()) {
@@ -90,6 +94,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 					}
 				}
 			}
+			/*xxx:拦截器通知器*/
 			else if (advisor instanceof IntroductionAdvisor) {
 				IntroductionAdvisor ia = (IntroductionAdvisor) advisor;
 				if (config.isPreFiltered() || ia.getClassFilter().matches(actualClass)) {

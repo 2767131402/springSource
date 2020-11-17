@@ -108,6 +108,7 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 			throw new AopConfigException("No advisors and no TargetSource specified");
 		}
 		this.advised = config;
+		/*xxx:获取完整的代理接口*/
 		this.proxiedInterfaces = AopProxyUtils.completeProxiedInterfaces(this.advised, true);
 		findDefinedEqualsAndHashCodeMethods(this.proxiedInterfaces);
 	}
@@ -156,6 +157,7 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 	 */
 	@Override
 	@Nullable
+	/*xxx: 第二个参数方法为实际要执行的方法，这个流程就是  对需要执行的方法，获取匹配了它的所有通知器*/
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		Object oldProxy = null;
 		boolean setProxyContext = false;
@@ -209,9 +211,11 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 			}
 			else {
 				// We need to create a method invocation...
+				/*xxx: 根据切面的配置，构造方法执行链*/
 				MethodInvocation invocation =
 						new ReflectiveMethodInvocation(proxy, target, method, args, targetClass, chain);
 				// Proceed to the joinpoint through the interceptor chain.
+				/*xxx:通过过滤器链逐步执行连接点，每一个拦截器即是一个连接点 */
 				retVal = invocation.proceed();
 			}
 

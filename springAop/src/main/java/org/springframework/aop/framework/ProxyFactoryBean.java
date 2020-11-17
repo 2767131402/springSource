@@ -159,6 +159,8 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	 * @see Advice
 	 * @see SingletonTargetSource
 	 */
+	/*xxx: 设置切面，或者切面通知者的bean名称列表。
+	*  在bean工厂要使用这个工厂bean的时候，这个列表必须总是被设置*/
 	public void setInterceptorNames(String... interceptorNames) {
 		this.interceptorNames = interceptorNames;
 	}
@@ -247,8 +249,10 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	@Override
 	@Nullable
 	public Object getObject() throws BeansException {
+		/*xxx:首先初始化拦截器链*/
 		initializeAdvisorChain();
 		if (isSingleton()) {
+			/*xxx: 如果是单例，则获取单个实例对象*/
 			return getSingletonInstance();
 		}
 		else {
@@ -256,6 +260,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 				logger.info("Using non-singleton proxies with singleton targets is often undesirable. " +
 						"Enable prototype proxies by setting the 'targetName' property.");
 			}
+			/*xxx: 否则获取原型实例*/
 			return newPrototypeInstance();
 		}
 	}
@@ -325,6 +330,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 			}
 			// Initialize the shared singleton instance.
 			super.setFrozen(this.freezeProxy);
+			/*xxx:获取单实例代理对象*/
 			this.singletonInstance = getProxy(createAopProxy());
 		}
 		return this.singletonInstance;
@@ -420,11 +426,14 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	 * is added. Interceptors added programmatically through the factory API
 	 * are unaffected by such changes.
 	 */
+	/*xxx: 基本作用就是从bean工厂把所有的Advisor，或者 Inteceptor取出来，然后存储至过滤器链中*/
 	private synchronized void initializeAdvisorChain() throws AopConfigException, BeansException {
 		if (this.advisorChainInitialized) {
+			/*xxx: 如果已经初始化过了，则不再进行初始化*/
 			return;
 		}
 
+		/*xxx:拦截器不为空，则进行如下处理*/
 		if (!ObjectUtils.isEmpty(this.interceptorNames)) {
 			if (this.beanFactory == null) {
 				throw new IllegalStateException("No BeanFactory available anymore (probably due to serialization) " +
@@ -440,10 +449,12 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 			// Materialize interceptor chain from bean names.
 			for (String name : this.interceptorNames) {
 				if (name.endsWith(GLOBAL_SUFFIX)) {
+					/*xxx: 如果当前工厂不是 具体的简单工厂，则报错*/
 					if (!(this.beanFactory instanceof ListableBeanFactory)) {
 						throw new AopConfigException(
 								"Can only use global advisors or interceptors with a ListableBeanFactory");
 					}
+					/*xxx:添加全局的切面拦截器*/
 					addGlobalAdvisors((ListableBeanFactory) this.beanFactory,
 							name.substring(0, name.length() - GLOBAL_SUFFIX.length()));
 				}
@@ -452,6 +463,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 					// If we get here, we need to add a named interceptor.
 					// We must check if it's a singleton or prototype.
 					Object advice;
+					/*xxx: 将命名拦截器加入，根据它是否为单例或者原型*/
 					if (this.singleton || this.beanFactory.isSingleton(name)) {
 						// Add the real Advisor/Advice to the chain.
 						advice = this.beanFactory.getBean(name);
@@ -504,14 +516,18 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	/**
 	 * Add all global interceptors and pointcuts.
 	 */
+	/*xxx: 通过这个方法，添加所有的拦截器和切点*/
 	private void addGlobalAdvisors(ListableBeanFactory beanFactory, String prefix) {
+		/*xxx:从bean工厂中，获取所有的 Advisor的子接口 */
 		String[] globalAdvisorNames =
 				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(beanFactory, Advisor.class);
+		/*xxx: 从bean工厂中，获取所有的拦截器，（其为advice的子接口）*/
 		String[] globalInterceptorNames =
 				BeanFactoryUtils.beanNamesForTypeIncludingAncestors(beanFactory, Interceptor.class);
 		if (globalAdvisorNames.length > 0 || globalInterceptorNames.length > 0) {
 			List<Object> beans = new ArrayList<>(globalAdvisorNames.length + globalInterceptorNames.length);
 			for (String name : globalAdvisorNames) {
+				/*xxx:名称符合前缀的则取出 */
 				if (name.startsWith(prefix)) {
 					beans.add(beanFactory.getBean(name));
 				}
@@ -535,6 +551,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	 * more strongly.
 	 * @param next advice, advisor or target object
 	 */
+	/*xxx: 在过滤链创建的时候，加入通知器*/
 	private void addAdvisorOnChainCreation(Object next) {
 		// We need to convert to an Advisor if necessary so that our source reference
 		// matches what we find from superclass interceptors.

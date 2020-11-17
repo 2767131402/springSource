@@ -340,6 +340,7 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 			Class<?> targetClass = getTargetClass(target);
 			CacheOperationSource cacheOperationSource = getCacheOperationSource();
 			if (cacheOperationSource != null) {
+				/*xxx: 通过切面的操作，执行缓存操作，由子类进行实现*/
 				Collection<CacheOperation> operations = cacheOperationSource.getCacheOperations(method, targetClass);
 				if (!CollectionUtils.isEmpty(operations)) {
 					return execute(invoker, method,

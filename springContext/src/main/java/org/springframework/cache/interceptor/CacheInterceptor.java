@@ -42,6 +42,7 @@ import org.springframework.util.Assert;
  * @since 3.1
  */
 @SuppressWarnings("serial")
+/*xxx: 缓存拦截器，最终作为一个 方法连接点 参与切面 */
 public class CacheInterceptor extends CacheAspectSupport implements MethodInterceptor, Serializable {
 
 	@Override

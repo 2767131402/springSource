@@ -53,7 +53,9 @@ public abstract class AopProxyUtils {
 	 * @see Advised#getTargetSource()
 	 * @see SingletonTargetSource#getTarget()
 	 */
+
 	@Nullable
+	/*xxx: 获取单例目标对象从给定的代理中*/
 	public static Object getSingletonTarget(Object candidate) {
 		if (candidate instanceof Advised) {
 			TargetSource targetSource = ((Advised) candidate).getTargetSource();
@@ -74,6 +76,7 @@ public abstract class AopProxyUtils {
 	 * @see org.springframework.aop.TargetClassAware#getTargetClass()
 	 * @see Advised#getTargetSource()
 	 */
+	/*xxx:获取最原始的目标类*/
 	public static Class<?> ultimateTargetClass(Object candidate) {
 		Assert.notNull(candidate, "Candidate object must not be null");
 		Object current = candidate;

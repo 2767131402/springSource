@@ -242,12 +242,15 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) {
+		/*xxx:拿到 特定名称 和 特定类，组成key，标识一个唯一bean*/
 		Object cacheKey = getCacheKey(beanClass, beanName);
 
 		if (!StringUtils.hasLength(beanName) || !this.targetSourcedBeans.contains(beanName)) {
+			/*xxx: 如果已经生成了代理对象，则跳过 */
 			if (this.advisedBeans.containsKey(cacheKey)) {
 				return null;
 			}
+			/*xxx: 如果该bean是 Advice,Pointcut,Advisor,AopInfrastructureBean的子类，或者 这个bean是源实例，则记录该bean的情况*/
 			if (isInfrastructureClass(beanClass) || shouldSkip(beanClass, beanName)) {
 				this.advisedBeans.put(cacheKey, Boolean.FALSE);
 				return null;
@@ -257,14 +260,18 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		// Create proxy here if we have a custom TargetSource.
 		// Suppresses unnecessary default instantiation of the target bean:
 		// The TargetSource will handle target instances in a custom fashion.
+		/*xxx: 根据是否有 TargetSource，来决定是否代理*/
 		TargetSource targetSource = getCustomTargetSource(beanClass, beanName);
 		if (targetSource != null) {
 			if (StringUtils.hasLength(beanName)) {
 				this.targetSourcedBeans.add(beanName);
 			}
+			/*xxx:获取当前bean的 切面通知和通知器，通过子类完成 */
 			Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(beanClass, beanName, targetSource);
 			Object proxy = createProxy(beanClass, beanName, specificInterceptors, targetSource);
+			/*xxx:记录已经创建了的代理对象 */
 			this.proxyTypes.put(cacheKey, proxy.getClass());
+			/*xxx: 然后将 生成的代理对象，返回给工厂，这就起到了移花接木的作用*/
 			return proxy;
 		}
 
@@ -283,8 +290,10 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	@Override
 	public Object postProcessAfterInitialization(@Nullable Object bean, String beanName) {
+		/*xxx: 某个bean 已经实例化后*/
 		if (bean != null) {
 			Object cacheKey = getCacheKey(bean.getClass(), beanName);
+			/*xxx: 由于 智能实例化 处理了 循环引用的情况，这里需要在bean实例化后，继续解决是否需要自动生成代理的情况*/
 			if (this.earlyProxyReferences.remove(cacheKey) != bean) {
 				return wrapIfNecessary(bean, beanName, cacheKey);
 			}

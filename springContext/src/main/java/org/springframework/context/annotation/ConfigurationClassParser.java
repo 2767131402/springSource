@@ -568,6 +568,7 @@ class ConfigurationClassParser {
 		}
 	}
 
+	/*xxx: 处理引入配置*/
 	private void processImports(ConfigurationClass configClass, SourceClass currentSourceClass,
 			Collection<SourceClass> importCandidates, Predicate<String> exclusionFilter,
 			boolean checkForCircularImports) {
@@ -605,6 +606,7 @@ class ConfigurationClassParser {
 						// Candidate class is an ImportBeanDefinitionRegistrar ->
 						// delegate to it to register additional bean definitions
 						Class<?> candidateClass = candidate.loadClass();
+						/*xxx:如果引入配置的类是 ImportaBeanDefinitionRegistrar的子类，则在这里 处理动态引入bean的操作*/
 						ImportBeanDefinitionRegistrar registrar =
 								ParserStrategyUtils.instantiateClass(candidateClass, ImportBeanDefinitionRegistrar.class,
 										this.environment, this.resourceLoader, this.registry);

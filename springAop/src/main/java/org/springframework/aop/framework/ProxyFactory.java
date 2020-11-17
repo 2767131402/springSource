@@ -38,6 +38,7 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	/**
 	 * Create a new ProxyFactory.
 	 */
+	/*xxx: 允许实例化时 不指定 被代理类*/
 	public ProxyFactory() {
 	}
 
@@ -47,7 +48,9 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * @param target the target object to be proxied
 	 */
 	public ProxyFactory(Object target) {
+		/*xxx: 允许实例化时，指定被代理的类，也就是AOP应用的 基础*/
 		setTarget(target);
+		/*xxx: 提取被代理对象的所有接口*/
 		setInterfaces(ClassUtils.getAllInterfaces(target));
 	}
 
@@ -56,6 +59,7 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * <p>No target, only interfaces. Must add interceptors.
 	 * @param proxyInterfaces the interfaces that the proxy should implement
 	 */
+	/*xxx: 允许实例化时，不指定被代理的类，而是指定被代理的接口，这种模式 必须与 拦截器一起使用*/
 	public ProxyFactory(Class<?>... proxyInterfaces) {
 		setInterfaces(proxyInterfaces);
 	}
@@ -68,6 +72,8 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * @param proxyInterface the interface that the proxy should implement
 	 * @param interceptor the interceptor that the proxy should invoke
 	 */
+	/*xxx: 允许实例化时，不指定被代理的类，而是指定被代理的接口，这种模式 必须与 拦截器一起使用*/
+	/*xxx: 所谓的拦截器，就是切面行为： advice;  拦截器为 advice的一个子类，包括构造拦截器，方法拦截器*/
 	public ProxyFactory(Class<?> proxyInterface, Interceptor interceptor) {
 		addInterface(proxyInterface);
 		addAdvice(interceptor);
@@ -79,6 +85,7 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * @param proxyInterface the interface that the proxy should implement
 	 * @param targetSource the TargetSource that the proxy should invoke
 	 */
+	/*xxx: 允许对象代理特定接口，类似于 静态代理？*/
 	public ProxyFactory(Class<?> proxyInterface, TargetSource targetSource) {
 		addInterface(proxyInterface);
 		setTargetSource(targetSource);

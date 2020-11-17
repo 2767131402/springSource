@@ -119,6 +119,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/*xxx: 这个是允许Aspectj自动代理的注解*/
+/*xxx: 在springboot中，默认是会配置这个注解，并且默认用的是 cglib的代理*/
+/*xxx: 与之想对的是，spring默认用的是 jdk接口代理*/
+
 @Import(AspectJAutoProxyRegistrar.class)
 public @interface EnableAspectJAutoProxy {
 

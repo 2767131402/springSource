@@ -55,6 +55,7 @@ import org.springframework.util.ReflectionUtils;
  * @author Rob Harrop
  * @see org.springframework.aop.framework.AopProxyUtils
  */
+/*xxx: 该类为aop内部使用提供支持*/
 public abstract class AopUtils {
 
 	/**
@@ -65,6 +66,7 @@ public abstract class AopUtils {
 	 * @see #isJdkDynamicProxy
 	 * @see #isCglibProxy
 	 */
+	/*xxx: 检测指定对象是否是代理对象： 这里只检测了两种，是否是jdk动态代理，以及是否是cglib代理*/
 	public static boolean isAopProxy(@Nullable Object object) {
 		return (object instanceof SpringProxy && (Proxy.isProxyClass(object.getClass()) ||
 				object.getClass().getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR)));
@@ -78,6 +80,7 @@ public abstract class AopUtils {
 	 * @param object the object to check
 	 * @see Proxy#isProxyClass
 	 */
+	/*xxx:监测指定对象是否是jdk动态代理：条件是 是springProxy的实例，同时类为Proxy或者Proxy的子类*/
 	public static boolean isJdkDynamicProxy(@Nullable Object object) {
 		return (object instanceof SpringProxy && Proxy.isProxyClass(object.getClass()));
 	}
@@ -90,6 +93,7 @@ public abstract class AopUtils {
 	 * @param object the object to check
 	 * @see ClassUtils#isCglibProxy(Object)
 	 */
+	/*xxx: 监测指定对象是否为cglib代理: 条件是 指定对象是 springProxy的子类，同时 类名中含有 $$ 字符串*/
 	public static boolean isCglibProxy(@Nullable Object object) {
 		return (object instanceof SpringProxy &&
 				object.getClass().getName().contains(ClassUtils.CGLIB_CLASS_SEPARATOR));
@@ -104,13 +108,16 @@ public abstract class AopUtils {
 	 * @see org.springframework.aop.TargetClassAware#getTargetClass()
 	 * @see org.springframework.aop.framework.AopProxyUtils#ultimateTargetClass(Object)
 	 */
+	/*xxx: 获取代理对象的目标对象*/
 	public static Class<?> getTargetClass(Object candidate) {
 		Assert.notNull(candidate, "Candidate object must not be null");
 		Class<?> result = null;
+		/*xxx: 如果对象实现了 感知接口，则直接通过感知接口获取目标类*/
 		if (candidate instanceof TargetClassAware) {
 			result = ((TargetClassAware) candidate).getTargetClass();
 		}
 		if (result == null) {
+			/*xxx: 如果是cglib代理，则获取该目标类的超类，如果是jdk动态代理，则获取目标类即可*/
 			result = (isCglibProxy(candidate) ? candidate.getClass().getSuperclass() : candidate.getClass());
 		}
 		return result;
@@ -221,13 +228,16 @@ public abstract class AopUtils {
 	 * for this bean includes any introductions
 	 * @return whether the pointcut can apply on any method
 	 */
+	/*xxx: 检测目标类是否满足切点条件*/
 	public static boolean canApply(Pointcut pc, Class<?> targetClass, boolean hasIntroductions) {
 		Assert.notNull(pc, "Pointcut must not be null");
+		/*xxx:首先会经过类过滤器进行过滤*/
 		if (!pc.getClassFilter().matches(targetClass)) {
 			return false;
 		}
 
 		MethodMatcher methodMatcher = pc.getMethodMatcher();
+		/*xxx:然后会通过切点的方法匹配策略 进行匹配*/
 		if (methodMatcher == MethodMatcher.TRUE) {
 			// No need to iterate the methods if we're matching any method anyway...
 			return true;
@@ -240,13 +250,17 @@ public abstract class AopUtils {
 
 		Set<Class<?>> classes = new LinkedHashSet<>();
 		if (!Proxy.isProxyClass(targetClass)) {
+			/*xxx:目标对象没有采用jdk动态代理，则要么是cglib代理，要么没有代理，获取到没有代理的原始类*/
 			classes.add(ClassUtils.getUserClass(targetClass));
 		}
+		/*xxx: 获取到目标类的所有的超类接口*/
 		classes.addAll(ClassUtils.getAllInterfacesForClassAsSet(targetClass));
 
 		for (Class<?> clazz : classes) {
+			/*xxx:获取目标类即接口的方法，只要有一个方法满足切点条件，即视为切点可以匹配*/
 			Method[] methods = ReflectionUtils.getAllDeclaredMethods(clazz);
 			for (Method method : methods) {
+				/*xxx:对目标类和方法进行切点验证*/
 				if (introductionAwareMethodMatcher != null ?
 						introductionAwareMethodMatcher.matches(method, targetClass, hasIntroductions) :
 						methodMatcher.matches(method, targetClass)) {
@@ -302,6 +316,7 @@ public abstract class AopUtils {
 	 * @return sublist of Advisors that can apply to an object of the given class
 	 * (may be the incoming List as-is)
 	 */
+	/*xxx: 从给定的预备通知器中，筛选出满足切点的通知器*/
 	public static List<Advisor> findAdvisorsThatCanApply(List<Advisor> candidateAdvisors, Class<?> clazz) {
 		if (candidateAdvisors.isEmpty()) {
 			return candidateAdvisors;
@@ -335,6 +350,7 @@ public abstract class AopUtils {
 	 * @throws org.springframework.aop.AopInvocationException in case of a reflection error
 	 */
 	@Nullable
+	/*xxx: 通过反射执行连接点*/
 	public static Object invokeJoinpointUsingReflection(@Nullable Object target, Method method, Object[] args)
 			throws Throwable {
 

@@ -84,6 +84,7 @@ public abstract class AbstractFallbackCacheOperationSource implements CacheOpera
 	 */
 	@Override
 	@Nullable
+	/*xxx: 获取所有的缓存操作 */
 	public Collection<CacheOperation> getCacheOperations(Method method, @Nullable Class<?> targetClass) {
 		if (method.getDeclaringClass() == Object.class) {
 			return null;
@@ -96,6 +97,7 @@ public abstract class AbstractFallbackCacheOperationSource implements CacheOpera
 			return (cached != NULL_CACHING_ATTRIBUTE ? cached : null);
 		}
 		else {
+			/*xxx: 计算缓存操作*/
 			Collection<CacheOperation> cacheOps = computeCacheOperations(method, targetClass);
 			if (cacheOps != null) {
 				if (logger.isTraceEnabled()) {

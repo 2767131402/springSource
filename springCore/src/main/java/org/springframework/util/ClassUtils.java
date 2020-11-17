@@ -370,6 +370,7 @@ public abstract class ClassUtils {
 	 * @param classLoader the ClassLoader to check against
 	 * (may be {@code null} in which case this method will always return {@code true})
 	 */
+	/*xxx:检测给定的类加载器是否可访问指定类*/
 	public static boolean isVisible(Class<?> clazz, @Nullable ClassLoader classLoader) {
 		if (classLoader == null) {
 			return true;
@@ -436,6 +437,7 @@ public abstract class ClassUtils {
 	 * @param classLoader the ClassLoader to check against
 	 * @since 5.0.6
 	 */
+	/*xxx:检测相同的类实例是否能够被某个类加载器加载*/
 	private static boolean isLoadable(Class<?> clazz, ClassLoader classLoader) {
 		try {
 			return (clazz == classLoader.loadClass(clazz.getName()));
@@ -735,6 +737,7 @@ public abstract class ClassUtils {
 	 * @param clazz the class to analyze for interfaces
 	 * @return all interfaces that the given object implements as a Set
 	 */
+	/*xxx: 获取给定类实现的所有接口*/
 	public static Set<Class<?>> getAllInterfacesForClassAsSet(Class<?> clazz) {
 		return getAllInterfacesForClassAsSet(clazz, null);
 	}
@@ -751,10 +754,12 @@ public abstract class ClassUtils {
 	public static Set<Class<?>> getAllInterfacesForClassAsSet(Class<?> clazz, @Nullable ClassLoader classLoader) {
 		Assert.notNull(clazz, "Class must not be null");
 		if (clazz.isInterface() && isVisible(clazz, classLoader)) {
+			/*xxx:如果目标类本身是接口，则不再获取超类接口*/
 			return Collections.singleton(clazz);
 		}
 		Set<Class<?>> interfaces = new LinkedHashSet<>();
 		Class<?> current = clazz;
+		/*xxx:向上遍历，取出所有的超类接口*/
 		while (current != null) {
 			Class<?>[] ifcs = current.getInterfaces();
 			for (Class<?> ifc : ifcs) {
