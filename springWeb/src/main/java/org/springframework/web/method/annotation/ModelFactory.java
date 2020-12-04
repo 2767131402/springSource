@@ -59,6 +59,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * @author Rossen Stoyanchev
  * @since 3.1
  */
+/*xxx: 处理器执行前，将响应数据设置到Model中*/
 public final class ModelFactory {
 
 	private static final Log logger = LogFactory.getLog(ModelFactory.class);
@@ -107,10 +108,13 @@ public final class ModelFactory {
 	public void initModel(NativeWebRequest request, ModelAndViewContainer container, HandlerMethod handlerMethod)
 			throws Exception {
 
+		/*xxx: 从SessionAttributes中，取出保存的参数，并合并到 mavContainer中*/
 		Map<String, ?> sessionAttributes = this.sessionAttributesHandler.retrieveAttributes(request);
 		container.mergeAttributes(sessionAttributes);
+		/*xxx: 执行 注释了  @ModelAttribute的方法 并将结果设置到 Model*/
 		invokeModelAttributeMethods(request, container);
 
+		/*xxx: 遍历既 注释了 @ModelAttribute 又注释了 @SessionAttributes注释中的参数*/
 		for (String name : findSessionAttributeArguments(handlerMethod)) {
 			if (!container.containsAttribute(name)) {
 				Object value = this.sessionAttributesHandler.retrieveAttribute(request, name);
@@ -129,10 +133,15 @@ public final class ModelFactory {
 	private void invokeModelAttributeMethods(NativeWebRequest request, ModelAndViewContainer container)
 			throws Exception {
 
+		/*xxx: 存在优先级关系: flashMap的属性> SessionAttributes中的属性>@ModelAttribute> 别的处理器中注释了 @ModelAttribute和@SessionAttributes的参数*/
+
 		while (!this.modelMethods.isEmpty()) {
+			/*xxx: 获取注释了 @ModelAttribute的方法*/
 			InvocableHandlerMethod modelMethod = getNextModelMethod(container).getHandlerMethod();
+			/*xxx: 获取注释 @ModelAttribute中设置的 value 作为参数*/
 			ModelAttribute ann = modelMethod.getMethodAnnotation(ModelAttribute.class);
 			Assert.state(ann != null, "No ModelAttribute annotation");
+			/*xxx: 如果参数名，已经在 mavContainer中，则跳过*/
 			if (container.containsAttribute(ann.name())) {
 				if (!ann.binding()) {
 					container.setBindingDisabled(ann.name());
@@ -140,6 +149,7 @@ public final class ModelFactory {
 				continue;
 			}
 
+			/*xxx: 执行 @ModelAttribute注释的方法*/
 			Object returnValue = modelMethod.invokeForRequest(request, container);
 			if (modelMethod.isVoid()) {
 				if (StringUtils.hasText(ann.value())) {
@@ -151,6 +161,7 @@ public final class ModelFactory {
 				continue;
 			}
 
+			/*xxx: 使用 getNameForReturnValue 获取参数名*/
 			String returnValueName = getNameForReturnValue(returnValue, modelMethod.getReturnType());
 			if (!ann.binding()) {
 				container.setBindingDisabled(returnValueName);
@@ -205,6 +216,7 @@ public final class ModelFactory {
 		else {
 			this.sessionAttributesHandler.storeAttributes(request, defaultModel);
 		}
+		/*xxx: 判断需不需要渲染页面,如果需要渲染，则给Model中相应参数设置 BindingResult*/
 		if (!container.isRequestHandled() && container.getModel() == defaultModel) {
 			updateBindingResult(request, defaultModel);
 		}

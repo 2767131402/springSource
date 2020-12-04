@@ -42,6 +42,7 @@ public class HandlerExecutionChain {
 
 	private static final Log logger = LogFactory.getLog(HandlerExecutionChain.class);
 
+	/*xxx: handler是一个对象，只要能够实际处理请求的 ，就是handler，可以是类，也可以是方法，也可以是其它*/
 	private final Object handler;
 
 	private final List<HandlerInterceptor> interceptorList = new ArrayList<>();

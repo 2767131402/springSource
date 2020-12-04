@@ -54,6 +54,7 @@ import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
  * @see ResponseStatus
  * @see ResponseStatusException
  */
+/*xxx: 用来解析 注释了  @ResponseStatus的异常*/
 public class ResponseStatusExceptionResolver extends AbstractHandlerExceptionResolver implements MessageSourceAware {
 
 	@Nullable

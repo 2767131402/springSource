@@ -68,6 +68,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
  * @author Juergen Hoeller
  * @since 3.1
  */
+/*xxx: 使用 HttpMessageConverter解析 request body 类型参数的基类*/
 public abstract class AbstractMessageConverterMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
 	private static final Set<HttpMethod> SUPPORTED_METHODS =

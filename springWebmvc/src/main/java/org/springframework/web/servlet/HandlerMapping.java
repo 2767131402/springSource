@@ -54,6 +54,8 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping
  * @see org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
  */
+/*xxx: springMvc的九大组件之一*/
+/*xxx： 用于查找 Handler的，springMVC会处理很多请求，具体的某一个请求才以哦那个哪个 Handler处理，需要使用该类来处理*/
 public interface HandlerMapping {
 
 	/**
@@ -168,6 +170,7 @@ public interface HandlerMapping {
 	 * @throws Exception if there is an internal error
 	 */
 	@Nullable
+	/*xxx: 只有提供了一个抽象方法*/
 	HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception;
 
 }

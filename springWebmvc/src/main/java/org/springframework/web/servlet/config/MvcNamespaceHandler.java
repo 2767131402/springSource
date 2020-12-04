@@ -27,10 +27,14 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  * @author Sebastien Deleuze
  * @since 3.0
  */
+/*xxx: 处理mvc这个命名空间的胚子和，需要使用这个类*/
+	/*xxx: 涉及到 三个方法 : init,parse 和 decorate*/
 public class MvcNamespaceHandler extends NamespaceHandlerSupport {
 
 	@Override
+	/*xxx: 用来初始化自己*/
 	public void init() {
+		/*xxx: 解析 annotationDriven 使用的是  AnnotationDrivenBeanDefinitionParser*/
 		registerBeanDefinitionParser("annotation-driven", new AnnotationDrivenBeanDefinitionParser());
 		registerBeanDefinitionParser("default-servlet-handler", new DefaultServletHandlerBeanDefinitionParser());
 		registerBeanDefinitionParser("interceptors", new InterceptorsBeanDefinitionParser());

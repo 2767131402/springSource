@@ -47,10 +47,13 @@ public class InvocableHandlerMethod extends HandlerMethod {
 
 
 	@Nullable
+	/*xxx: 可以创建WebDataBinder，用于参数解析器 ArgumentResolver中*/
 	private WebDataBinderFactory dataBinderFactory;
 
+	/*xxx: 用于解析参数*/
 	private HandlerMethodArgumentResolverComposite resolvers = new HandlerMethodArgumentResolverComposite();
 
+	/*xxx: 用来获取参数名， 用于 MethodParameter中*/
 	private ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
 
 
@@ -131,10 +134,13 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	public Object invokeForRequest(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer,
 			Object... providedArgs) throws Exception {
 
+		/*xxx: 准备方法所需要的参数*/
 		Object[] args = getMethodArgumentValues(request, mavContainer, providedArgs);
 		if (logger.isTraceEnabled()) {
 			logger.trace("Arguments: " + Arrays.toString(args));
 		}
+		/*xxx: 具体调用Method，我们写的方法都是通过该方法来执行的*/
+		/*xxx: 是HandlerMethod系列的处理器中，最核心的方法*/
 		return doInvoke(args);
 	}
 
@@ -144,22 +150,28 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	 * <p>The resulting array will be passed into {@link #doInvoke}.
 	 * @since 5.1.2
 	 */
+	/*xxx: 参数绑定的方法*/
 	protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer,
 			Object... providedArgs) throws Exception {
 
+		/*xxx: 获取方法的参数，在HandlerMethod中*/
 		MethodParameter[] parameters = getMethodParameters();
 		if (ObjectUtils.isEmpty(parameters)) {
 			return EMPTY_ARGS;
 		}
 
+		/*xxx: 用于保存解析出参数的值*/
 		Object[] args = new Object[parameters.length];
 		for (int i = 0; i < parameters.length; i++) {
 			MethodParameter parameter = parameters[i];
+			/*xxx: 给parameter设置参数名解析器*/
 			parameter.initParameterNameDiscovery(this.parameterNameDiscoverer);
+			/*xxx: 如果相应类型的参数 已经在proivdedArgs中提供了，则直接设置到 parameter*/
 			args[i] = findProvidedArgument(parameter, providedArgs);
 			if (args[i] != null) {
 				continue;
 			}
+			/*xxx: 使用 argumentResolvers解析参数*/
 			if (!this.resolvers.supportsParameter(parameter)) {
 				throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver"));
 			}
@@ -185,8 +197,10 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	 */
 	@Nullable
 	protected Object doInvoke(Object... args) throws Exception {
+		/*xxx: 先使用反射将之强制变为可用*/
 		ReflectionUtils.makeAccessible(getBridgedMethod());
 		try {
+			/*xxx: 通过反射，调用bean的对应方法*/
 			return getBridgedMethod().invoke(getBean(), args);
 		}
 		catch (IllegalArgumentException ex) {

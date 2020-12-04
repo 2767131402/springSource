@@ -301,6 +301,7 @@ public class FreeMarkerView extends AbstractTemplateView {
 
 		// Grab the locale-specific version of the template.
 		Locale locale = RequestContextUtils.getLocale(request);
+		/*xxx: 从local中获取freeMarker的tempalte*/
 		processTemplate(getTemplate(locale), fmModel, response);
 	}
 
@@ -354,6 +355,7 @@ public class FreeMarkerView extends AbstractTemplateView {
 	 * @see #getTemplate(String, Locale)
 	 */
 	protected Template getTemplate(Locale locale) throws IOException {
+		/*xxx: 获取url*/
 		String url = getUrl();
 		Assert.state(url != null, "'url' not set");
 		return getTemplate(url, locale);

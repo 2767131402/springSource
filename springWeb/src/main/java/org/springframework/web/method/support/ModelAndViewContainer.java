@@ -47,21 +47,28 @@ import org.springframework.web.bind.support.SimpleSessionStatus;
  * @author Juergen Hoeller
  * @since 3.1
  */
+/*xxx: 承担着 整个请求过程中，数据的传递工作*/
 public class ModelAndViewContainer {
 
+	/*xxx: 为true,则处理器返回 redirect视图时，一定不使用 defaultModel*/
 	private boolean ignoreDefaultModelOnRedirect = false;
 
 	@Nullable
+	/*xxx: 视图，可以是实际视图，也可以是String类型的逻辑视图*/
 	private Object view;
 
+	/*xxx: 默认使用的Model*/
 	private final ModelMap defaultModel = new BindingAwareModelMap();
 
 	@Nullable
+	/*xxx: redirect类型的Model*/
 	private ModelMap redirectModel;
 
+	/*xxx: 处理器返回 redirect视图的标识*/
 	private boolean redirectModelScenario = false;
 
 	@Nullable
+	/*xxx: 用于设置 SessionAttribute使用完的标识*/
 	private HttpStatus status;
 
 	private final Set<String> noBinding = new HashSet<>(4);
@@ -70,6 +77,8 @@ public class ModelAndViewContainer {
 
 	private final SessionStatus sessionStatus = new SimpleSessionStatus();
 
+	/*xxx: 请求是否已经处理完成的标识*/
+	/*xxx: 在处理器返回值，有 @ResponseBody注释， 或者返回值 为 HttpEntity类型等情况，都会将 requestHandled设置为true */
 	private boolean requestHandled = false;
 
 
@@ -138,6 +147,7 @@ public class ModelAndViewContainer {
 	 * a method argument) and {@code ignoreDefaultModelOnRedirect=false}.
 	 */
 	public ModelMap getModel() {
+		/*xxx: 根据条件返回 defaultModel 或者  redirectModel*/
 		if (useDefaultModel()) {
 			return this.defaultModel;
 		}
@@ -299,6 +309,7 @@ public class ModelAndViewContainer {
 	 * the same name taking precedence (i.e. not getting replaced).
 	 * A shortcut for {@code getModel().mergeAttributes(Map<String, ?>)}.
 	 */
+	/*xxx: 合并属性: 如果原来的Model不包含传入的属性则添加进去，否则就不做操作*/
 	public ModelAndViewContainer mergeAttributes(@Nullable Map<String, ?> attributes) {
 		getModel().mergeAttributes(attributes);
 		return this;

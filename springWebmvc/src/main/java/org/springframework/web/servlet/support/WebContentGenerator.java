@@ -374,14 +374,21 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 * @throws ServletException if the request cannot be handled because a check failed
 	 * @since 4.2
 	 */
+	/*xxx: 需要解决的问题:
+	   哪些参数需要绑定,
+	   参数值的来源,
+	   具体绑定的方法*/
 	protected final void checkRequest(HttpServletRequest request) throws ServletException {
 		// Check whether we should support the request method.
 		String method = request.getMethod();
+		/*xxx: 探测是否支持当前的method类型（get,post,put,delete）*/
+		/*xxx: supportedMethods 默认为空*/
 		if (this.supportedMethods != null && !this.supportedMethods.contains(method)) {
 			throw new HttpRequestMethodNotSupportedException(method, this.supportedMethods);
 		}
 
 		// Check whether a session is required.
+		/*xxx: 如果需要session,则先检测session是否合法(默认不检测)*/
 		if (this.requireSession && request.getSession(false) == null) {
 			throw new HttpSessionRequiredException("Pre-existing session required but none found");
 		}
@@ -398,6 +405,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 			if (logger.isTraceEnabled()) {
 				logger.trace("Applying default " + getCacheControl());
 			}
+			/*xxx: 给 response设置缓存过期时间*/
 			applyCacheControl(response, this.cacheControl);
 		}
 		else {
@@ -447,6 +455,7 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	 */
 	@SuppressWarnings("deprecation")
 	protected final void applyCacheSeconds(HttpServletResponse response, int cacheSeconds) {
+		/*xxx: 老版本spring 的 HTTP1.0的缓存行为*/
 		if (this.useExpiresHeader || !this.useCacheControlHeader) {
 			// Deprecated HTTP 1.0 cache behavior, as in previous Spring versions
 			if (cacheSeconds > 0) {

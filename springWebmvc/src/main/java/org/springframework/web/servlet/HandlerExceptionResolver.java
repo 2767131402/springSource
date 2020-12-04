@@ -33,6 +33,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 22.11.2003
  */
+/*xxx: springMVC九大组件之一*/
+	/*xxx: 对异常进行处理*/
 public interface HandlerExceptionResolver {
 
 	/**
@@ -50,6 +52,7 @@ public interface HandlerExceptionResolver {
 	 * or {@code null} for default processing in the resolution chain
 	 */
 	@Nullable
+	/*xxx: 从异常中，解析出 ModelAndView*/
 	ModelAndView resolveException(
             HttpServletRequest request, HttpServletResponse response, @Nullable Object handler, Exception ex);
 

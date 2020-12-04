@@ -29,6 +29,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 2.0
  */
+/*xxx: springMVC九大组件之一*/
+	/*xxx: 对于某些 Handler处理完后，没有设置View，也没有设置 viewName的，就需要从 request 获取 viewName*/
 public interface RequestToViewNameTranslator {
 
 	/**
@@ -39,6 +41,7 @@ public interface RequestToViewNameTranslator {
 	 * @throws Exception if view name translation fails
 	 */
 	@Nullable
+	/*xxx: 从 request 中获取 viewName*/
 	String getViewName(HttpServletRequest request) throws Exception;
 
 }

@@ -42,6 +42,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Sam Brannen
  * @since 3.0
  */
+/*xxx: 所有直接解析异常类的父类，定义了通用的解析流程，并使用了模板模式，子类只需要覆盖相应的方法即可*/
 public abstract class AbstractHandlerExceptionResolver implements HandlerExceptionResolver, Ordered {
 
 	private static final String HEADER_CACHE_CONTROL = "Cache-Control";
@@ -136,8 +137,11 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	public ModelAndView resolveException(
 			HttpServletRequest request, HttpServletResponse response, @Nullable Object handler, Exception ex) {
 
+		/*xxx: 判断短期的ExceptionResolver 是否可以解析所传入的处理器抛出的异常,不可以则返回nul，交给其它ExceptionResolver解析*/
 		if (shouldApplyTo(request, handler)) {
+			/*xxx: 根据 preventResponseCaching 标识判断 是否给response 设置禁用缓存的属性*/
 			prepareResponse(ex, response);
+			/*xxx: 模板方法，留给子类实现*/
 			ModelAndView result = doResolveException(request, response, handler, ex);
 			if (result != null) {
 				// Print debug message when warn logger is not enabled.
@@ -145,6 +149,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 					logger.debug("Resolved [" + ex + "]" + (result.isEmpty() ? "" : " to " + result));
 				}
 				// Explicitly configured warn logger in logException method.
+				/*xxx: 记录异常日志*/
 				logException(ex, request);
 			}
 			return result;

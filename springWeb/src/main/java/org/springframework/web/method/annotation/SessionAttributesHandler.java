@@ -46,14 +46,20 @@ import org.springframework.web.context.request.WebRequest;
  * @author Juergen Hoeller
  * @since 3.1
  */
+/*xxx: 用来处理 @SessionAttributes注释的参数*/
 public class SessionAttributesHandler {
 
+	/*xxx: 存储  @SessionAttributes 注释里 value 对应的值，及参数名*/
 	private final Set<String> attributeNames = new HashSet<>();
 
+	/*xxx: 存储 @SessionAttributes注释里 types 对应的值，也就是参数类型*/
 	private final Set<Class<?>> attributeTypes = new HashSet<>();
 
+	/*xxx: 用于存储 所有已知可以被当前处理器处理的属性名*/
 	private final Set<String> knownAttributeNames = Collections.newSetFromMap(new ConcurrentHashMap<>(4));
 
+	/*xxx: 用于具体执行 Attribute的存储工作*/
+	/*xxx: 它默认将参数保存到 session中*/
 	private final SessionAttributeStore sessionAttributeStore;
 
 

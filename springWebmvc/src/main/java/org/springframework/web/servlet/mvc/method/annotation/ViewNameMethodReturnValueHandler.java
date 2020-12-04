@@ -42,6 +42,7 @@ import org.springframework.web.servlet.RequestToViewNameTranslator;
  * @author Juergen Hoeller
  * @since 3.1
  */
+/*xxx: 使用的最多的 返回值解析器*/
 public class ViewNameMethodReturnValueHandler implements HandlerMethodReturnValueHandler {
 
 	@Nullable
@@ -69,6 +70,7 @@ public class ViewNameMethodReturnValueHandler implements HandlerMethodReturnValu
 
 
 	@Override
+	/*xxx: 处理返回值为void ,或者为 String的参数*/
 	public boolean supportsReturnType(MethodParameter returnType) {
 		Class<?> paramType = returnType.getParameterType();
 		return (void.class == paramType || CharSequence.class.isAssignableFrom(paramType));
@@ -80,6 +82,7 @@ public class ViewNameMethodReturnValueHandler implements HandlerMethodReturnValu
 
 		if (returnValue instanceof CharSequence) {
 			String viewName = returnValue.toString();
+			/*xxx: 如果返回值为String，则将其设置到 mavContainer的view中*/
 			mavContainer.setViewName(viewName);
 			if (isRedirectViewName(viewName)) {
 				mavContainer.setRedirectModelScenario(true);

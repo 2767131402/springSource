@@ -64,7 +64,9 @@ public class SimpleServletHandlerAdapter implements HandlerAdapter {
 	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
+		/*xxx: 直接简单地调用Servlet处理*/
 		((Servlet) handler).service(request, response);
+		/*xxx: 返回空*/
 		return null;
 	}
 

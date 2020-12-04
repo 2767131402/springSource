@@ -35,6 +35,8 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.web.servlet.view.ContentNegotiatingViewResolver
  * @see org.springframework.web.servlet.view.BeanNameViewResolver
  */
+/*xxx: springMVC九大组件之一*/
+	/*xxx: 用来将 String类型的视图名 和 Locale 解析为 View类型的视图*/
 public interface ViewResolver {
 
 	/**
@@ -53,6 +55,8 @@ public interface ViewResolver {
 	 * (typically in case of problems creating an actual View object)
 	 */
 	@Nullable
+	/*xxx: 将String类型的视图名，解析为实际的视图*/
+	/*xxx: 它主要处理两个问题: 1.使用什么模板  2.采用什么技术填入参数*/
 	View resolveViewName(String viewName, Locale locale) throws Exception;
 
 }

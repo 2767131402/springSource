@@ -96,6 +96,7 @@ public class AcceptHeaderLocaleResolver implements LocaleResolver {
 	@Override
 	public Locale resolveLocale(HttpServletRequest request) {
 		Locale defaultLocale = getDefaultLocale();
+		/*xxx: 直接从请求中，获取 Accept-Language*/
 		if (defaultLocale != null && request.getHeader("Accept-Language") == null) {
 			return defaultLocale;
 		}

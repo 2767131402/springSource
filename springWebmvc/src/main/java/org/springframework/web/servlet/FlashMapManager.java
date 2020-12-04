@@ -29,6 +29,8 @@ import org.springframework.lang.Nullable;
  * @since 3.1
  * @see FlashMap
  */
+/*xxx: springMVC的九大组件之一*/
+	/*xxx: 用于管理FlashMap，FlashMap 主要用在 redirect 中，传递参数*/
 public interface FlashMapManager {
 
 	/**
@@ -43,6 +45,8 @@ public interface FlashMapManager {
 	 * @return a FlashMap matching the current request or {@code null}
 	 */
 	@Nullable
+	/*xxx: 用于恢复参数*/
+	/*xxx: 默认是将参数保存到  session中的*/
 	FlashMap retrieveAndUpdate(HttpServletRequest request, HttpServletResponse response);
 
 	/**

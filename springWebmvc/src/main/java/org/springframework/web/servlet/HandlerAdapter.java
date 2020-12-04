@@ -47,6 +47,12 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter
  * @see org.springframework.web.servlet.handler.SimpleServletHandlerAdapter
  */
+/*xxx: 适配器，因为 Handler是任意形式，只要能够处理请求就OK*/
+	/*xxx: Servlet规范中，处理方法的结构是固定的，都是  request 和 response作为参数的方法*/
+	/*xxx: 其也是 springMvc九大组件中，最复杂的*/
+
+	/*xxx: springMVC的 九大组件之一*/
+	/*xxx: 用它的原因是因为: springMVC中，并没有对处理器做任何限制*/
 public interface HandlerAdapter {
 
 	/**
@@ -60,6 +66,7 @@ public interface HandlerAdapter {
 	 * @param handler the handler object to check
 	 * @return whether or not this object can use the given handler
 	 */
+	/*xxx: 判断是否可以使用某个 Handler*/
 	boolean supports(Object handler);
 
 	/**
@@ -75,6 +82,7 @@ public interface HandlerAdapter {
 	 * model data, or {@code null} if the request has been handled directly
 	 */
 	@Nullable
+	/*xxx: 执行具体的Handler方法*/
 	ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
 
 	/**
@@ -86,6 +94,7 @@ public interface HandlerAdapter {
 	 * @see javax.servlet.http.HttpServlet#getLastModified
 	 * @see org.springframework.web.servlet.mvc.LastModified#getLastModified
 	 */
+	/*xxx: 获取资源的 Last-Modified*/
 	long getLastModified(HttpServletRequest request, Object handler);
 
 }

@@ -72,6 +72,7 @@ import org.springframework.web.method.HandlerMethod;
  * @see org.springframework.web.servlet.theme.ThemeChangeInterceptor
  * @see javax.servlet.Filter
  */
+/*xxx: 处理器拦截器*/
 public interface HandlerInterceptor {
 
 	/**

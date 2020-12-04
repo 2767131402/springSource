@@ -46,6 +46,7 @@ import org.springframework.util.ClassUtils;
  * @see InternalResourceView
  * @see JstlView
  */
+/*xxx: 用于解析 jsp视图*/
 public class InternalResourceViewResolver extends UrlBasedViewResolver {
 
 	private static final boolean jstlPresent = ClassUtils.isPresent(
@@ -94,6 +95,7 @@ public class InternalResourceViewResolver extends UrlBasedViewResolver {
 
 
 	@Override
+	/*xxx: 返回InternalResourceView类型*/
 	protected Class<?> requiredViewClass() {
 		return InternalResourceView.class;
 	}

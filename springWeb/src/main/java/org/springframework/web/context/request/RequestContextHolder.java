@@ -42,6 +42,7 @@ import org.springframework.util.ClassUtils;
  * @see org.springframework.web.filter.RequestContextFilter
  * @see org.springframework.web.servlet.DispatcherServlet
  */
+/*xxx:可以获取其它的http对象，如request,session,response,属性等等*/
 public abstract class RequestContextHolder  {
 
 	private static final boolean jsfPresent =

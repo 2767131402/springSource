@@ -42,6 +42,7 @@ import org.springframework.web.util.WebUtils;
  * @see javax.servlet.ServletRequest#getAttribute
  * @see HttpSession#getAttribute
  */
+/*xxx: 用于管理 request 和 session 的属性*/
 public class ServletRequestAttributes extends AbstractRequestAttributes {
 
 	/**

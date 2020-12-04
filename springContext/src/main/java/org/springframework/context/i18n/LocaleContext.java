@@ -31,6 +31,7 @@ import org.springframework.lang.Nullable;
  * @see LocaleContextHolder#getLocale()
  * @see TimeZoneAwareLocaleContext
  */
+/*xxx: 可以获取Locale*/
 public interface LocaleContext {
 
 	/**

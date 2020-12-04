@@ -79,6 +79,7 @@ public interface View {
 	 * or {@code null} if not predetermined
 	 */
 	@Nullable
+	/*xxx: 获取内容类型*/
 	default String getContentType() {
 		return null;
 	}
@@ -94,6 +95,7 @@ public interface View {
 	 * @param response he HTTP response we are building
 	 * @throws Exception if rendering failed
 	 */
+	/*xxx: 渲染，实际上是将相应的解析结果，输出到response中*/
 	void render(@Nullable Map<String, ?> model, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
 

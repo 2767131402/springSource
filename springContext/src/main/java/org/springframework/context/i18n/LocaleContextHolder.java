@@ -44,9 +44,11 @@ import org.springframework.lang.Nullable;
  */
 public final class LocaleContextHolder {
 
+	/*xxx: 线程私有变量*/
 	private static final ThreadLocal<LocaleContext> localeContextHolder =
 			new NamedThreadLocal<>("LocaleContext");
 
+	/*xxx: 线程私有变量*/
 	private static final ThreadLocal<LocaleContext> inheritableLocaleContextHolder =
 			new NamedInheritableThreadLocal<>("LocaleContext");
 

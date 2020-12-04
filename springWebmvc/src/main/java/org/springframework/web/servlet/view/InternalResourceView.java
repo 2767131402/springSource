@@ -135,6 +135,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * This includes setting the model as request attributes.
 	 */
 	@Override
+	/*xxx: 将逻辑视图的数据进行融合为实际的视图*/
 	protected void renderMergedOutputModel(
 			Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -145,9 +146,11 @@ public class InternalResourceView extends AbstractUrlBasedView {
 		exposeHelpers(request);
 
 		// Determine the path for the request dispatcher.
+		/*xxx: 获取分发视图的路径*/
 		String dispatcherPath = prepareForRendering(request, response);
 
 		// Obtain a RequestDispatcher for the target resource (typically a JSP).
+		/*xxx: 构造jsp视图请求分发器*/
 		RequestDispatcher rd = getRequestDispatcher(request, dispatcherPath);
 		if (rd == null) {
 			throw new ServletException("Could not get RequestDispatcher for [" + getUrl() +
@@ -198,6 +201,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 	 * @throws Exception if preparations failed
 	 * @see #getUrl()
 	 */
+	/*xxx: 在解析前，对url进行处理*/
 	protected String prepareForRendering(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 

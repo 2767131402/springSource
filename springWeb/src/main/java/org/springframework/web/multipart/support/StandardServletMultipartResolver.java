@@ -58,6 +58,7 @@ import org.springframework.web.multipart.MultipartResolver;
  * @see HttpServletRequest#getParts()
  * @see org.springframework.web.multipart.commons.CommonsMultipartResolver
  */
+/*xxx: 使用 Servlet3.0标准的上传方式*/
 public class StandardServletMultipartResolver implements MultipartResolver {
 
 	private boolean resolveLazily = false;
@@ -78,6 +79,7 @@ public class StandardServletMultipartResolver implements MultipartResolver {
 
 
 	@Override
+	/*xxx: 判断是不是post请求，同时 检查 contentType是不是以 multipart/ 开头*/
 	public boolean isMultipart(HttpServletRequest request) {
 		return StringUtils.startsWithIgnoreCase(request.getContentType(), "multipart/");
 	}

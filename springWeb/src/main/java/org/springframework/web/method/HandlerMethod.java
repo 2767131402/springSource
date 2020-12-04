@@ -59,22 +59,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Sam Brannen
  * @since 3.1
  */
+/*xxx: 用于封装Handler 和其中 具体处理请求的 Method,分别对应其中的bean 和 method属性*/
 public class HandlerMethod {
 
 	/** Logger that is available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	/*xxx: 实际的handler,为一个bean*/
 	private final Object bean;
 
 	@Nullable
+	/*xxx: 处理传入的bean为String 的情况*/
 	private final BeanFactory beanFactory;
 
+	/*xxx: 记录bean的类型*/
 	private final Class<?> beanType;
 
+	/*xxx: 需要执行的方法*/
 	private final Method method;
 
+	/*xxx: 如果method是 bridge method,则设置为所有对应的原有防范，否则直接设置为 method*/
+	/*xxx: 桥方法，指的是含有 泛型 的继承关系中的方法*/
 	private final Method bridgedMethod;
 
+	/*xxx: 请求参数*/
 	private final MethodParameter[] parameters;
 
 	@Nullable
@@ -328,6 +336,7 @@ public class HandlerMethod {
 	 * If the provided instance contains a bean name rather than an object instance,
 	 * the bean name is resolved before a {@link HandlerMethod} is created and returned.
 	 */
+	/*xxx: 将String类型的Bean更改为容器中实际的bean*/
 	public HandlerMethod createWithResolvedBean() {
 		Object handler = this.bean;
 		if (this.bean instanceof String) {
@@ -460,6 +469,7 @@ public class HandlerMethod {
 	/**
 	 * A MethodParameter with HandlerMethod-specific behavior.
 	 */
+	/*xxx: 封装方法调用的参数*/
 	protected class HandlerMethodParameter extends SynthesizingMethodParameter {
 
 		@Nullable
@@ -533,6 +543,7 @@ public class HandlerMethod {
 	/**
 	 * A MethodParameter for a HandlerMethod return type based on an actual return value.
 	 */
+	/*xxx: 封装方法返回的参数*/
 	private class ReturnValueMethodParameter extends HandlerMethodParameter {
 
 		@Nullable

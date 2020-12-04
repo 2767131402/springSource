@@ -42,6 +42,7 @@ import org.springframework.web.servlet.ViewResolver;
  * @since 18.06.2003
  * @see UrlBasedViewResolver
  */
+/*xxx: 从上下文中获取视图*/
 public class BeanNameViewResolver extends WebApplicationObjectSupport implements ViewResolver, Ordered {
 
 	private int order = Ordered.LOWEST_PRECEDENCE;  // default: same as non-Ordered

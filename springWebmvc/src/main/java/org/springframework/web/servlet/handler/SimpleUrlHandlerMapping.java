@@ -58,6 +58,7 @@ import org.springframework.util.CollectionUtils;
  */
 public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 
+	/*xxx: 定义了一个内部的map*/
 	private final Map<String, Object> urlMap = new LinkedHashMap<>();
 
 
@@ -136,6 +137,7 @@ public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 	@Override
 	public void initApplicationContext() throws BeansException {
 		super.initApplicationContext();
+		/*xxx: 初始化时，将子类的map注册到父类当中*/
 		registerHandlers(this.urlMap);
 	}
 
@@ -152,6 +154,7 @@ public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 		else {
 			urlMap.forEach((url, handler) -> {
 				// Prepend with slash if not already present.
+				/*xxx: 规范化路径*/
 				if (!url.startsWith("/")) {
 					url = "/" + url;
 				}

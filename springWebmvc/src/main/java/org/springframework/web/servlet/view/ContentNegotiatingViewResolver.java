@@ -86,6 +86,11 @@ import org.springframework.web.servlet.ViewResolver;
  * @see InternalResourceViewResolver
  * @see BeanNameViewResolver
  */
+/*xxx: 在别的解析器解析的结果上，增加对 MediaType 和 后缀的支持*/
+	/*xxx: MediaType 即 媒体类型，也叫 Content-Type*/
+	/*xxx: 视图解析的过程是： 遍历ViewResolver解析视图，可能会解析出多个视图；
+	*  	然后使用 request获取MediaType，也可能会有多个结果
+	* 	最后将这两个结果进行匹配，查找出最优的视图*/
 public class ContentNegotiatingViewResolver extends WebApplicationObjectSupport
 		implements ViewResolver, Ordered, InitializingBean {
 

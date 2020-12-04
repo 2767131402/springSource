@@ -140,6 +140,7 @@ import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
  * @since 3.0
  * @see org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
  */
+/*xxx: 根据异常类型的不同，使用不同的方法进行处理*/
 public class DefaultHandlerExceptionResolver extends AbstractHandlerExceptionResolver {
 
 	/**

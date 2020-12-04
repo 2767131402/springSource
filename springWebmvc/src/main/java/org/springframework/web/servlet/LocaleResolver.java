@@ -51,6 +51,9 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.web.servlet.support.RequestContext#getLocale
  * @see org.springframework.web.servlet.support.RequestContextUtils#getLocale
  */
+/*xxx: springMVC九大组件之一*/
+	/*xxx: 用于提供解析视图需要的 Local*/
+	/*xxx: 它时i18n的基础*/
 public interface LocaleResolver {
 
 	/**
@@ -69,6 +72,7 @@ public interface LocaleResolver {
 	 * @throws UnsupportedOperationException if the LocaleResolver
 	 * implementation does not support dynamic changing of the locale
 	 */
+	/*xxx: 提供认为设置区域的功能*/
 	void setLocale(HttpServletRequest request, @Nullable HttpServletResponse response, @Nullable Locale locale);
 
 }

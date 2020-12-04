@@ -60,6 +60,7 @@ import org.springframework.web.util.WebUtils;
  * @see ServletFileUpload
  * @see org.apache.commons.fileupload.disk.DiskFileItemFactory
  */
+/*xxx: 使用 commons-fileupload 方式上传方式*/
 public class CommonsMultipartResolver extends CommonsFileUploadSupport
 		implements MultipartResolver, ServletContextAware {
 
@@ -128,6 +129,7 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	@Override
 	public MultipartHttpServletRequest resolveMultipart(final HttpServletRequest request) throws MultipartException {
 		Assert.notNull(request, "Request must not be null");
+		/*xxx: 将 request 转换为  DefaultMultipartHttpServletRequest类型*/
 		if (this.resolveLazily) {
 			return new DefaultMultipartHttpServletRequest(request) {
 				@Override
@@ -140,6 +142,9 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 			};
 		}
 		else {
+			/*xxx: 使用 commons-fileupload中的 FileUpload组件，解析出 fileItems
+			*  		然后 调用 parseFileItems 将fileItems 分为参数 和文件两类，并设置到 Map中
+			* 		Map中，分别存储 : 参数，参数的ContentType 和 上传的文件*/
 			MultipartParsingResult parsingResult = parseRequest(request);
 			return new DefaultMultipartHttpServletRequest(request, parsingResult.getMultipartFiles(),
 					parsingResult.getMultipartParameters(), parsingResult.getMultipartParameterContentTypes());

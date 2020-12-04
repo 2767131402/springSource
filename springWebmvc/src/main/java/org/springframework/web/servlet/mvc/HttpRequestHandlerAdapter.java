@@ -50,7 +50,9 @@ public class HttpRequestHandlerAdapter implements HandlerAdapter {
 	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
+		/*xxx: 根据请求直接执行*/
 		((HttpRequestHandler) handler).handleRequest(request, response);
+		/*xxx: 返回空*/
 		return null;
 	}
 

@@ -37,6 +37,7 @@ package org.springframework.core;
  * @see LocalVariableTableParameterNameDiscoverer
  * @see KotlinReflectionParameterNameDiscoverer
  */
+/*xxx: 获取定义参数的名称*/
 public class DefaultParameterNameDiscoverer extends PrioritizedParameterNameDiscoverer {
 
 	/**

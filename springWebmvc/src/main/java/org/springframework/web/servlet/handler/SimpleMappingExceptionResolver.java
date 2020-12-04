@@ -43,6 +43,7 @@ import org.springframework.web.util.WebUtils;
  * @since 22.11.2003
  * @see org.springframework.web.servlet.DispatcherServlet
  */
+/*xxx: 需要提前配置异常类 和 view 的对应关系然后才能使用*/
 public class SimpleMappingExceptionResolver extends AbstractHandlerExceptionResolver {
 
 	/** The default name of the exception attribute: "exception". */

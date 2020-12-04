@@ -72,6 +72,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  * @see #setInterceptors
  * @see org.springframework.web.servlet.HandlerInterceptor
  */
+/*xxx:采用模板模式，设计了HandlerMapping 实现的整体结构*/
 public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		implements HandlerMapping, Ordered, BeanNameAware {
 
@@ -85,8 +86,10 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 
 	private PathMatcher pathMatcher = new AntPathMatcher();
 
+	/*xxx: 用于配置 springMVC的拦截器*/
 	private final List<Object> interceptors = new ArrayList<>();
 
+	/*xxx:除了MappedInterceptor外， 不需要进行匹配，会全部添加到 chain里面*/
 	private final List<HandlerInterceptor> adaptedInterceptors = new ArrayList<>();
 
 	@Nullable
@@ -369,8 +372,11 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	 */
 	@Override
 	protected void initApplicationContext() throws BeansException {
+		/*xxx: 模板方法，用于给子类提供一个 添加(或修改) Interceptors的入口*/
 		extendInterceptors(this.interceptors);
+		/*xxx: 用于将 springMVC容器 及 父容器中的所有 MappedInterceptor类型的Bean 添加到 mappedInterceptors属性*/
 		detectMappedInterceptors(this.adaptedInterceptors);
+		/*xxx: 初始化 Interceptor */
 		initInterceptors();
 	}
 
@@ -488,8 +494,10 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	@Override
 	@Nullable
 	public final HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+		/*xxx: 模板方法，留给子类实现，也是子类主要做的事*/
 		Object handler = getHandlerInternal(request);
 		if (handler == null) {
+			/*xxx: 没有获取到，则使用默认的 Handler*/
 			handler = getDefaultHandler();
 		}
 		if (handler == null) {
@@ -498,6 +506,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		// Bean name or resolved handler?
 		if (handler instanceof String) {
 			String handlerName = (String) handler;
+			/*xxx: 如果找到的是 String 类型，则去 MVC的容器里面查找对应的Bean */
 			handler = obtainApplicationContext().getBean(handlerName);
 		}
 
@@ -592,6 +601,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		HandlerExecutionChain chain = (handler instanceof HandlerExecutionChain ?
 				(HandlerExecutionChain) handler : new HandlerExecutionChain(handler));
 
+		/*xxx: 将adaptedInterceptors 中，MappedInterceptor中符合要求的添加进去*/
 		for (HandlerInterceptor interceptor : this.adaptedInterceptors) {
 			if (interceptor instanceof MappedInterceptor) {
 				MappedInterceptor mappedInterceptor = (MappedInterceptor) interceptor;

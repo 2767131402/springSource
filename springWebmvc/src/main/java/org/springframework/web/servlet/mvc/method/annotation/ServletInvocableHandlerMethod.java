@@ -60,6 +60,7 @@ import org.springframework.web.util.NestedServletException;
  * @author Juergen Hoeller
  * @since 3.1
  */
+/*xxx: 一种Handler,增加了 方法执行，参数解析，返回值处理等功能*/
 public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 
 	private static final Method CALLABLE_METHOD = ClassUtils.getMethod(Callable.class, "call");
@@ -102,24 +103,32 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 	public void invokeAndHandle(ServletWebRequest webRequest, ModelAndViewContainer mavContainer,
 			Object... providedArgs) throws Exception {
 
+		/*xxx: 首先调用父类，执行请求*/
 		Object returnValue = invokeForRequest(webRequest, mavContainer, providedArgs);
+		/*xxx: 接着 处理 @ResponseStatus 注释*/
 		setResponseStatus(webRequest);
 
+		/*xxx: 最后处理返回值*/
 		if (returnValue == null) {
+			/*xxx: 如果 request的notModified为真, @ResponseStatus存在，或者 mavContainer的requestandled为true，
+			   	则设置为请求已经处理，并返回*/
 			if (isRequestNotModified(webRequest) || getResponseStatus() != null || mavContainer.isRequestHandled()) {
 				disableContentCachingIfNecessary(webRequest);
 				mavContainer.setRequestHandled(true);
 				return;
 			}
 		}
+		/*xxx: 如果returnValue不为空，且@ResponseStatus注解里面有 reason，则也设置为请求已经处理，并返回*/
 		else if (StringUtils.hasText(getResponseStatusReason())) {
 			mavContainer.setRequestHandled(true);
 			return;
 		}
 
+		/*xxx: 设置为请求已处理*/
 		mavContainer.setRequestHandled(false);
 		Assert.state(this.returnValueHandlers != null, "No return value handlers");
 		try {
+			/*xxx: 使用returnValueHandlers 处理返回值*/
 			this.returnValueHandlers.handleReturnValue(
 					returnValue, getReturnValueType(returnValue), mavContainer, webRequest);
 		}
@@ -134,6 +143,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 	/**
 	 * Set the response status according to the {@link ResponseStatus} annotation.
 	 */
+	/*xxx: 根据注解的值，设置 response 的相关属性*/
 	private void setResponseStatus(ServletWebRequest webRequest) throws IOException {
 		HttpStatus status = getResponseStatus();
 		if (status == null) {
@@ -152,6 +162,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 		}
 
 		// To be picked up by RedirectView
+		/*xxx: 设置到 request 的属性，为了在redirect中使用*/
 		webRequest.getRequest().setAttribute(View.RESPONSE_STATUS_ATTRIBUTE, status);
 	}
 

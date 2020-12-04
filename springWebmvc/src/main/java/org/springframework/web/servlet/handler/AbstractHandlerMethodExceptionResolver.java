@@ -31,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Rossen Stoyanchev
  * @since 3.1
  */
+/*xxx: 相当于一个适配器，  一般的处理器是类的形式，但 HandlerMethod 是将方法作为处理器来使用的，所以需要进行适配*/
+	/*xxx: 既能够处理 @Controller本身的 @ExceptionHandler，也能够处理 @ControllerAdvice的 @ExceptionHandler全局异常*/
 public abstract class AbstractHandlerMethodExceptionResolver extends AbstractHandlerExceptionResolver {
 
 	/**

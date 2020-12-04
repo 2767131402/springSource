@@ -43,6 +43,9 @@ import org.springframework.web.servlet.ViewResolver;
  * @author Juergen Hoeller
  * @see #loadView
  */
+/*xxx: 一家独大，它是所有可以缓存解析过的视图的基类*/
+	/*xxx: 提供了统一的缓存功能，当视图解析过一次，就被缓存起来，直到缓存被删除前，视图的解析都会自动从缓存中获取*/
+	/*xxx: 它有三个直接子类: UrlBasedViewResolver，ResourceBundleViewResolver（废弃）,XmlViewResolver(废弃)*/
 public abstract class AbstractCachingViewResolver extends WebApplicationObjectSupport implements ViewResolver {
 
 	/** Default maximum number of entries for the view cache: 1024. */
@@ -65,6 +68,7 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 
 
 	/** The maximum number of entries in the cache. */
+	/*xxx: cacheLimit的默认值是 1024，即默认可以最多缓存1024个视图*/
 	private volatile int cacheLimit = DEFAULT_CACHE_LIMIT;
 
 	/** Whether we should refrain from resolving views again if unresolved once. */
@@ -79,6 +83,7 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 	/** Map from view key to View instance, synchronized for View creation. */
 	@SuppressWarnings("serial")
 	private final Map<Object, View> viewCreationCache =
+			/*xxx: 使用了LinkedHashMap，有序，且数量达到阈值，会自动删除最前面的节点，需要覆盖默认的方法*/
 			new LinkedHashMap<Object, View>(DEFAULT_CACHE_LIMIT, 0.75f, true) {
 				@Override
 				protected boolean removeEldestEntry(Map.Entry<Object, View> eldest) {
@@ -272,6 +277,7 @@ public abstract class AbstractCachingViewResolver extends WebApplicationObjectSu
 	 */
 	@Nullable
 	protected View createView(String viewName, Locale locale) throws Exception {
+		/*xxx: 调用了 laodView*/
 		return loadView(viewName, locale);
 	}
 

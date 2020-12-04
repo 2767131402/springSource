@@ -46,6 +46,7 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.ui.context.Theme
  * @see org.springframework.ui.context.ThemeSource
  */
+/*xxx: springMVC的九大组件之一，用来解析主题,  根据 request 解析 Theme*/
 public interface ThemeResolver {
 
 	/**

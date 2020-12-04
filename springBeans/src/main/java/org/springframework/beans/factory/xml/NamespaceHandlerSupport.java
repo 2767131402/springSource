@@ -69,6 +69,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	 */
 	@Override
 	@Nullable
+	/*xxx: 用于将 配置的标签 转换成  spring 需要的 BeanDefinition*/
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		BeanDefinitionParser parser = findParserForElement(element, parserContext);
 		return (parser != null ? parser.parse(element, parserContext) : null);
@@ -111,6 +112,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	private BeanDefinitionDecorator findDecoratorForNode(Node node, ParserContext parserContext) {
 		BeanDefinitionDecorator decorator = null;
 		String localName = parserContext.getDelegate().getLocalName(node);
+		/*xxx: 先判断是 标签 还是属性，然后 再调用相应方法进行处理*/
 		if (node instanceof Element) {
 			decorator = this.decorators.get(localName);
 		}

@@ -63,36 +63,47 @@ public class MethodParameter {
 	private static final Annotation[] EMPTY_ANNOTATION_ARRAY = new Annotation[0];
 
 
+	/*xxx: 参数所在的宿主，可能是普通方法，也可能是构造方法， 1.8新增的父类 Executable*/
 	private final Executable executable;
 
+	/*xxx: 参数所在的序号，从0开始计数*/
 	private final int parameterIndex;
 
 	@Nullable
 	private volatile Parameter parameter;
 
+	/*xxx: 参数的嵌套级别*/
 	private int nestingLevel;
 
 	/** Map from Integer level to Integer type index. */
 	@Nullable
+	/*xxx: 每层嵌套参数的序数*/
 	Map<Integer, Integer> typeIndexesPerLevel;
 
 	/** The containing class. Could also be supplied by overriding {@link #getContainingClass()} */
 	@Nullable
+	/*xxx: 容器的类型，及参数所属方法所在的类*/
 	private volatile Class<?> containingClass;
 
 	@Nullable
+	/*xxx: 参数的类型*/
 	private volatile Class<?> parameterType;
 
 	@Nullable
+	/*xxx: 参数的类型，Type*/
 	private volatile Type genericParameterType;
 
 	@Nullable
+	/*xxx: 参数的注释*/
 	private volatile Annotation[] parameterAnnotations;
 
 	@Nullable
+	/*xxx: 参数名称查找器*/
+	/*xxx: 正常的反射技术，不能获取到参数名，需要使用该组件进行查找*/
 	private volatile ParameterNameDiscoverer parameterNameDiscoverer;
 
 	@Nullable
+	/*xxx: 参数名称*/
 	private volatile String parameterName;
 
 	@Nullable

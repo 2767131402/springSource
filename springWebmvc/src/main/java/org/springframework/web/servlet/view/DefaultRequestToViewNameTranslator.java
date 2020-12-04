@@ -175,6 +175,7 @@ public class DefaultRequestToViewNameTranslator implements RequestToViewNameTran
 	 */
 	@Override
 	public String getViewName(HttpServletRequest request) {
+		/*xxx: 从request中获取 lookupPath,然后对其进行处理，加上前后缀，并返回*/
 		String path = ServletRequestPathUtils.getCachedPathValue(request);
 		return (this.prefix + transformPath(path) + this.suffix);
 	}

@@ -67,6 +67,7 @@ import org.springframework.web.multipart.support.RequestPartServletServerHttpReq
  * @author Juergen Hoeller
  * @since 3.1
  */
+/*xxx: 解析注释了  @RequestPart,@MultipartFile类型，以及 javax.servlet.http.Part类型的参数*/
 public class RequestPartMethodArgumentResolver extends AbstractMessageConverterMethodArgumentResolver {
 
 	/**

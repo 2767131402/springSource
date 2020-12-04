@@ -33,6 +33,7 @@ import org.springframework.web.servlet.support.WebContentGenerator;
  * @author Arjen Poutsma
  * @since 3.1
  */
+/*xxx: 继承了 Order接口，可以在配置时，设置顺序*/
 public abstract class AbstractHandlerMethodAdapter extends WebContentGenerator implements HandlerAdapter, Ordered {
 
 	private int order = Ordered.LOWEST_PRECEDENCE;
@@ -66,6 +67,7 @@ public abstract class AbstractHandlerMethodAdapter extends WebContentGenerator i
 	 */
 	@Override
 	public final boolean supports(Object handler) {
+		/*xxx: 在handler必须是 HandlerMethod的子类 */
 		return (handler instanceof HandlerMethod && supportsInternal((HandlerMethod) handler));
 	}
 
